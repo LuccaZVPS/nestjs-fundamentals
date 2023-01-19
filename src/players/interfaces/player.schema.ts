@@ -12,7 +12,7 @@ export class PlayerSchema {
   phoneNumber: string;
   @Prop({ required: true })
   email: string;
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   name: string;
   @Prop({ required: true })
   ranking: string;
