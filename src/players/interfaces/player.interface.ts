@@ -1,6 +1,7 @@
-import { PlayerSchema } from './player.schema';
+import { Document } from 'mongoose';
+import { playerSchema } from './player.schema';
 
-export interface Player extends PlayerSchema {
+export interface Player {
   readonly _id: string;
   readonly phoneNumber: string;
   readonly email: string;

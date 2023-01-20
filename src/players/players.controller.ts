@@ -8,13 +8,11 @@ import {
   Param,
   Post,
   Put,
-  Query,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { CreatePlayer as CreatePlayerDTO } from './DTOs/create-player.dto';
 import { Player } from './interfaces/player.interface';
-import { PlayerValidationParameters } from './pipes/player-validation-parameters';
 import { PlayersService } from './players.service';
 
 @Controller('api/v1/players')
