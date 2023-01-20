@@ -6,17 +6,12 @@ import {
 } from '@nestjs/common';
 import { CreatePlayer } from './DTOs/create-player.dto';
 import { Player } from './interfaces/player.interface';
-import { randomUUID } from 'crypto';
 import { InjectModel } from '@nestjs/mongoose';
-import { PlayerDocument } from './interfaces/player.schema';
 import { Document, Model } from 'mongoose';
-import { NotFoundError } from 'rxjs';
 
 @Injectable()
 export class PlayersService {
-  constructor(
-    @InjectModel('players') private playerModel: Model<PlayerDocument>,
-  ) {}
+  constructor(@InjectModel('players') private playerModel: Model<Player>) {}
   private readonly logger = new Logger(PlayersService.name);
   async createPlayer(createPlayerDTO: CreatePlayer): Promise<void> {
     const { email, name, phoneNumber } = createPlayerDTO;
@@ -26,8 +21,7 @@ export class PlayersService {
       throw new ConflictException();
     }
 
-    const player: Player = {
-      _id: randomUUID(),
+    const player = {
       email: email,
       name: name,
       phoneNumber: phoneNumber,
@@ -35,7 +29,8 @@ export class PlayersService {
       position: 1,
       ranking: 'A',
     };
-    this.playerModel.create(player);
+    const playertoSave = new this.playerModel(player);
+    playertoSave.save();
   }
 
   async getPlayers(): Promise<Player[]> {
