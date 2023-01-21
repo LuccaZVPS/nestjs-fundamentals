@@ -37,8 +37,9 @@ export class CategoriesController {
   async updateCategory(
     @Param('id') id,
     @Body() categoryDTO: UpdateCategoryDTO,
-  ): Promise<Category> {
-    return await this.categoriesService.update(categoryDTO, id);
+  ) {
+    await this.categoriesService.update(categoryDTO, id);
+    return 'categories updated';
   }
   @Post('/:category/player/:player')
   async assignCategory(@Param() params: any): Promise<void> {
