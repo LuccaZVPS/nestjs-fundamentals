@@ -71,7 +71,6 @@ export class PlayersService {
   }
   async findById(id: string): Promise<Document<unknown, any, Player> & Player> {
     const player = await this.playerModel.findById(id);
-    this.logger.log(player);
     if (!player) {
       throw new NotFoundException();
     }
