@@ -9,5 +9,6 @@ import { PlayersService } from './players.service';
   ],
   controllers: [PlayersController],
   providers: [PlayersService],
+  exports: [PlayersService],
 })
 export class PlayersModule {}

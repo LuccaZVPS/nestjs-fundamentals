@@ -34,7 +34,6 @@ export class PlayersController {
   @Put('/:id')
   @UsePipes(ValidationPipe)
   async update(@Body() createPlayerDto: CreatePlayerDTO, @Param('id') id) {
-    const { email, name, phoneNumber } = createPlayerDto;
     await this.playersService.update(createPlayerDto, id);
     return 'Player updated';
   }
@@ -50,9 +49,7 @@ export class PlayersController {
     if (!player) {
       throw new NotFoundException('Player doesnt exist');
     }
-    const { name, email, phoneNumber, _id, ranking, position, playerImageUrl } =
-      player;
-    return { name, email, phoneNumber, _id, ranking, position, playerImageUrl };
+    return player;
   }
 
   @Delete('/:id')
