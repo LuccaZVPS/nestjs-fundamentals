@@ -33,7 +33,8 @@ export class ChallengesController {
   @Put('/:id')
   @UsePipes(ValidationPipe)
   async updateChallenge(@Body() body: UpdateChallengeDTO, @Param() id: string) {
-    return await this.challengesService.updateChallenge(body, id);
+    await this.challengesService.updateChallenge(body, id);
+    return 'Challenge updated';
   }
 
   @Delete('/:id')

@@ -57,15 +57,20 @@ export class ChallengesService {
       .populate('match');
   }
   async findOne(id: string) {
-    return await this.challengesModel
+    const player = this.challengesModel
       .find()
       .where('players')
       .in([id])
       .populate('players')
       .populate('challenger');
+
+    if (!player) {
+      throw new NotFoundException('Player doest exist');
+    }
+    return player;
   }
   async updateChallenge(body: UpdateChallengeDTO, id: string) {
-    return await this.challengesModel.findOneAndUpdate(
+    await this.challengesModel.findOneAndUpdate(
       { id: id },
       {
         $set: {
